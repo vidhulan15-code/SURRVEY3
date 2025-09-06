@@ -102,17 +102,14 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .welcome-section h2 {
-            font-size: 2em;
-            color: #ffffff;
-            margin-bottom: 15px;
-        }
+        /* Adjusted margin for the paragraph after removing h2 */
         .welcome-section p {
             color: #cccccc;
             line-height: 1.7;
             font-size: 1.1em;
             max-width: 550px;
-            margin-bottom: 30px;
+            margin-bottom: 30px; /* Keep consistent spacing */
+            margin-top: 0; /* Ensure no extra top margin from being first child */
             animation-delay: 0.2s;
         }
         .welcome-section .btn {
@@ -422,7 +419,7 @@
 </head>
 <body>
     <div class="container">
-        <form id="surveyForm" action="https://script.google.com/macros/s/AKfycbwZkot1uwcHwV55nAplrid2MAmMnRRs5Z_1uxJn9j-ND6_lJNCUVx1G6YNjO2yz08MK/exec" method="POST" onsubmit="return false;">
+        <form id="surveyForm" action="https://script.google.com/macros/s/AKfycbwZkot1uwcHwV55nAplrid2MAaMnRRs5Z_1uxJn9j-ND6_lJNCUVx1G6YNjO2yz08MK/exec" method="POST" onsubmit="return false;">
             <input type="hidden" name="sheetName" value="GeminiFeedback">
             
             <div class="progress-bar"><div class="progress-fill" id="progressBar"></div></div>
@@ -452,7 +449,6 @@
 
             <div class="section active" id="section-0">
                 <div class="welcome-section">
-                    <h2>Help Us Shape the Future of AI</h2>
                     <p>Your insights are crucial for our research. Thank you for taking the time to share your experience with Gemini.</p>
                     <button type="button" class="btn" id="beginSurveyBtn">Begin Survey</button>
                     <p class="time-estimate">Takes ~3 minutes</p>
