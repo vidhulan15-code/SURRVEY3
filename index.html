@@ -10,7 +10,7 @@
         html { scroll-behavior: smooth; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #000000; /* Dark background from the image */
+            background: #000000;
             min-height: 100vh;
             padding: 10px;
             display: flex;
@@ -24,51 +24,37 @@
         .container {
             max-width: 800px;
             width: 100%;
-            background: #1a1a1a; /* Slightly lighter dark for contrast */
+            background: #1a1a1a;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             overflow: hidden;
-            border: 1px solid #333333; /* Darker border */
+            border: 1px solid #333333;
         }
 
-        /* Header Section */
+        /* Header Section - Simplified */
         .header {
-            background: #1a1a1a; /* Match container background */
-            padding: 30px 15px;
+            background: #1a1a1a;
+            padding: 20px 15px; /* Reduced padding */
             text-align: center;
             color: white;
+            border-bottom: 1px solid #333333; /* Separator line */
         }
         .logo {
-            margin: 0 auto 20px;
+            margin: 0 auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 60px; /* Define height for SVG container */
+            height: 50px;
         }
-
-        /* SVG Logo Styling */
         .gemini-svg-logo {
-            width: 250px; /* Match desired width */
-            height: 100%; /* Fill parent height */
-            filter: drop-shadow(0 0 8px rgba(137, 179, 248, 0.4)); /* Subtle glow */
+            width: 220px;
+            height: 100%;
+            filter: drop-shadow(0 0 8px rgba(137, 179, 248, 0.4));
         }
-        /* Gradients for the SVG */
-        .gemini-svg-logo #star-gradient stop:first-child { stop-color: #66b3ff; } /* Blue start */
-        .gemini-svg-logo #star-gradient stop:last-child { stop-color: #ff80ed; } /* Pink end */
-        .gemini-svg-logo #text-gradient stop:first-child { stop-color: #66b3ff; } /* Blue start for text */
-        .gemini-svg-logo #text-gradient stop:last-child { stop-color: #ff80ed; } /* Pink end for text */
-
-        h1 {
-            font-size: 1.8em;
-            margin-bottom: 8px;
-            font-weight: 700;
-            color: #d1e2ff; /* Lighter blue-ish white */
-        }
-        .subtitle {
-            font-size: 1em;
-            opacity: 0.9;
-            color: #a0a0a0; /* Softer subtitle color */
-        }
+        .gemini-svg-logo #star-gradient stop:first-child { stop-color: #66b3ff; }
+        .gemini-svg-logo #star-gradient stop:last-child { stop-color: #ff80ed; }
+        .gemini-svg-logo #text-gradient stop:first-child { stop-color: #66b3ff; }
+        .gemini-svg-logo #text-gradient stop:last-child { stop-color: #ff80ed; }
 
         /* Section Display and Animations */
         .section {
@@ -84,7 +70,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Welcome Section Specifics */
+        /* Welcome Section - ALIGNMENT FIXED */
         .welcome-section {
             display: flex;
             flex-direction: column;
@@ -102,14 +88,17 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        /* Adjusted margin for the paragraph after removing h2 */
+        .welcome-section h1 { /* Main title now here */
+            font-size: 2.2em;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
         .welcome-section p {
             color: #cccccc;
             line-height: 1.7;
             font-size: 1.1em;
             max-width: 550px;
-            margin-bottom: 30px; /* Keep consistent spacing */
-            margin-top: 0; /* Ensure no extra top margin from being first child */
+            margin-bottom: 30px;
             animation-delay: 0.2s;
         }
         .welcome-section .btn {
@@ -126,294 +115,76 @@
         .question-container {
             margin-bottom: 30px;
             padding: 20px;
-            background: #282828; /* Slightly lighter inner background */
+            background: #282828;
             border-radius: 12px;
-            border: 1px solid #444444; /* Match theme */
+            border: 1px solid #444444;
         }
         .question-label {
             font-size: 1.1em;
-            color: #d1e2ff; /* Lighter blue-ish white */
+            color: #d1e2ff;
             margin-bottom: 20px;
             font-weight: 600;
             text-align: center;
         }
 
-        /* Meter/Gauge Styling */
-        .meter-container {
-            position: relative;
-            max-width: 320px;
-            width: 100%;
-            aspect-ratio: 2 / 1;
-            margin: 0 auto 25px;
-        }
-        .speedometer-gauge, .emoji-meter, .needle {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
+        /* Meter/Gauge and Rating Buttons Styling */
+        .meter-container { position: relative; max-width: 320px; width: 100%; aspect-ratio: 2 / 1; margin: 0 auto 25px; }
+        .speedometer-gauge, .emoji-meter, .needle { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         .speedometer-gauge { z-index: 1; }
         .emoji-meter { z-index: 2; pointer-events: none; }
         .needle { z-index: 3; }
-        .needle-image {
-            width: 4px;
-            height: 45%;
-            background: #ffffff;
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform-origin: bottom center;
-            transform: translateX(-50%) rotate(-90deg);
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .needle-image::after {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: #ffffff;
-            border-radius: 50%;
-            bottom: -6px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .emoji-container {
-            position: absolute;
-            transform: translate(-50%, -50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .emoji {
-            font-size: 20px;
-            margin-bottom: 5px;
-            transition: transform 0.3s;
-            color: white;
-        }
-        .emoji.active {
-            transform: scale(1.3);
-        }
-        .emoji-label {
-            font-size: 0.7em;
-            color: #b0b0b0; /* Softer label color */
-            text-align: center;
-        }
-
-        /* Rating Buttons */
-        .rating-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        .rating-btn {
-            padding: 8px 12px;
-            border: 2px solid #66b3ff; /* Brighter blue for buttons */
-            background: #282828;
-            color: #66b3ff;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-        .rating-btn:hover {
-            background: #66b3ff;
-            color: #000000; /* Black text on hover */
-            transform: translateY(-2px);
-        }
-        .rating-btn.selected {
-            background: linear-gradient(135deg, #66b3ff, #ff80ed); /* Gradient for selected */
-            color: #000000;
-            border-color: #ff80ed; /* End color of gradient */
-        }
-
-        /* Form Group and Inputs */
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #d1e2ff;
-            font-weight: 600;
-            font-size: 1em;
-        }
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #555555;
-            border-radius: 10px;
-            font-size: 1em;
-            transition: border-color 0.3s;
-            background: #1a1a1a; /* Match container background */
-            color: #e8eaed;
-        }
-        .form-group textarea::placeholder {
-            color: #999;
-            opacity: 1;
-        }
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #66b3ff; /* Brighter blue focus */
-        }
-
-        /* Buttons (Next, Previous, Submit) */
-        .btn {
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #66b3ff, #ff80ed); /* Blue to Pink gradient */
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-size: 1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-block;
-            margin: 15px 8px;
-        }
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 179, 255, 0.4); /* Blue glow */
-        }
-        .btn-secondary {
-            background: #555555; /* Darker secondary button */
-        }
-        .btn-secondary:hover {
-            background: #777777;
-            box-shadow: 0 10px 25px rgba(100, 100, 100, 0.2);
-        }
-        .navigation {
-            display: flex;
-            justify-content: center;
-            padding-top: 15px;
-            flex-wrap: wrap; /* Added for responsiveness */
-        }
-
-        /* Thank You Section */
-        .thank-you {
-            text-align: center;
-            padding: 60px 30px;
-        }
-        .thank-you h2 {
-            color: #66b3ff; /* Brighter blue for thank you */
-            font-size: 2.2em;
-            margin-bottom: 15px;
-        }
-        .thank-you p {
-            color: #cccccc;
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-        .checkmark {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 25px;
-            background: linear-gradient(135deg, #66b3ff, #ff80ed); /* Gradient checkmark */
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: scaleIn 0.5s ease-in;
-        }
-        @keyframes scaleIn {
-            from { transform: scale(0); }
-            to { transform: scale(1); }
-        }
-
-        /* Progress Bar */
-        .progress-bar {
-            height: 6px;
-            background: #333333;
-            position: relative;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #66b3ff, #ff80ed); /* Gradient progress */
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-
-        /* Required Field Indicator */
-        .required {
-            color: #ff6666; /* Redder for error */
-            font-size: 0.9em;
-            margin-left: 5px;
-        }
-
-        /* Loading Indicator */
-        .loading {
-            display: none;
-            text-align: center;
-            margin: 20px 0;
-            color: #cccccc;
-        }
-        .loading-spinner {
-            border: 4px solid #333333;
-            border-top: 4px solid #66b3ff; /* Blue spinner */
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        .needle-image { width: 4px; height: 45%; background: #ffffff; position: absolute; bottom: 0; left: 50%; transform-origin: bottom center; transform: translateX(-50%) rotate(-90deg); transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .needle-image::after { content: ''; position: absolute; width: 12px; height: 12px; background: #ffffff; border-radius: 50%; bottom: -6px; left: 50%; transform: translateX(-50%); }
+        .emoji-container { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; }
+        .emoji { font-size: 20px; margin-bottom: 5px; transition: transform 0.3s; color: white; }
+        .emoji.active { transform: scale(1.3); }
+        .emoji-label { font-size: 0.7em; color: #b0b0b0; text-align: center; }
+        .rating-buttons { display: flex; justify-content: center; gap: 6px; margin-top: 20px; flex-wrap: wrap; }
+        .rating-btn { padding: 8px 12px; border: 2px solid #66b3ff; background: #282828; color: #66b3ff; border-radius: 20px; cursor: pointer; transition: all 0.3s; font-weight: 600; }
+        .rating-btn:hover { background: #66b3ff; color: #000000; transform: translateY(-2px); }
+        .rating-btn.selected { background: linear-gradient(135deg, #66b3ff, #ff80ed); color: #000000; border-color: #ff80ed; }
+        
+        /* General Form Styling */
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #d1e2ff; font-weight: 600; font-size: 1em; }
+        .form-group textarea, .form-group select { width: 100%; padding: 12px 15px; border: 2px solid #555555; border-radius: 10px; font-size: 1em; transition: border-color 0.3s; background: #1a1a1a; color: #e8eaed; }
+        .form-group textarea::placeholder { color: #999; opacity: 1; }
+        .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #66b3ff; }
+        
+        /* Buttons, Navigation, and Thank You */
+        .btn { padding: 12px 30px; background: linear-gradient(135deg, #66b3ff, #ff80ed); color: white; border: none; border-radius: 25px; font-size: 1em; font-weight: 600; cursor: pointer; transition: all 0.3s; display: inline-block; margin: 15px 8px; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(102, 179, 255, 0.4); }
+        .btn-secondary { background: #555555; }
+        .btn-secondary:hover { background: #777777; box-shadow: 0 10px 25px rgba(100, 100, 100, 0.2); }
+        .navigation { display: flex; justify-content: center; padding-top: 15px; flex-wrap: wrap; }
+        .thank-you { text-align: center; padding: 60px 30px; }
+        .thank-you h2 { color: #66b3ff; font-size: 2.2em; margin-bottom: 15px; }
+        .thank-you p { color: #cccccc; font-size: 1.1em; line-height: 1.6; }
+        .checkmark { width: 70px; height: 70px; margin: 0 auto 25px; background: linear-gradient(135deg, #66b3ff, #ff80ed); border-radius: 50%; display: flex; align-items: center; justify-content: center; animation: scaleIn 0.5s ease-in; }
+        @keyframes scaleIn { from { transform: scale(0); } to { transform: scale(1); } }
+        
+        /* Progress Bar and Loading */
+        .progress-bar { height: 6px; background: #333333; position: relative; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #66b3ff, #ff80ed); width: 0%; transition: width 0.5s ease; }
+        .required { color: #ff6666; font-size: 0.9em; margin-left: 5px; }
+        .loading { display: none; text-align: center; margin: 20px 0; color: #cccccc; }
+        .loading-spinner { border: 4px solid #333333; border-top: 4px solid #66b3ff; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 15px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         /* Responsive Adjustments */
         @media (max-width: 600px) {
-            .container {
-                border-radius: 0; /* Full width on smaller screens */
-                margin: 0;
-            }
-            .header {
-                padding: 20px 10px;
-            }
-            h1 {
-                font-size: 1.5em;
-            }
-            .subtitle {
-                font-size: 0.9em;
-            }
-            .welcome-section {
-                padding: 40px 20px;
-            }
-            .welcome-section h2 {
-                font-size: 1.8em;
-            }
-            .welcome-section p {
-                font-size: 1em;
-            }
-            .question-container {
-                padding: 15px;
-            }
-            .question-label {
-                font-size: 1em;
-            }
-            .rating-btn {
-                padding: 6px 10px;
-                font-size: 0.9em;
-            }
-            .btn {
-                padding: 10px 20px;
-                font-size: 0.9em;
-            }
-            .checkmark {
-                width: 50px;
-                height: 50px;
-            }
-            .thank-you h2 {
-                font-size: 1.8em;
-            }
-            .thank-you p {
-                font-size: 1em;
-            }
+            .container { border-radius: 0; margin: 0; }
+            .header { padding: 20px 10px; }
+            .welcome-section { padding: 40px 20px; }
+            .welcome-section h1 { font-size: 1.8em; }
+            .welcome-section p { font-size: 1em; }
+            .question-container { padding: 15px; }
+            .question-label { font-size: 1em; }
+            .rating-btn { padding: 6px 10px; font-size: 0.9em; }
+            .btn { padding: 10px 20px; font-size: 0.9em; }
+            .checkmark { width: 50px; height: 50px; }
+            .thank-you h2 { font-size: 1.8em; }
+            .thank-you p { font-size: 1em; }
         }
     </style>
 </head>
@@ -444,11 +215,11 @@
                         </text>
                     </svg>
                 </div>
-                <h1>Gemini Experience Survey</h1>
-                <p class="subtitle"></p> </div>
+            </div>
 
             <div class="section active" id="section-0">
                 <div class="welcome-section">
+                    <h1>Gemini Experience Survey</h1>
                     <p>Your insights are crucial for our research. Thank you for taking the time to share your experience with Gemini.</p>
                     <button type="button" class="btn" id="beginSurveyBtn">Begin Survey</button>
                     <p class="time-estimate">Takes ~3 minutes</p>
