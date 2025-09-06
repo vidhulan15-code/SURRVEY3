@@ -3,48 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perplexity Experience Survey</title>
+    <title>Gemini Experience Survey</title>
     <style>
+        /* General Resets and Base Styles */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #1A1A1A;
+            background: #000000; /* Dark background from the image */
             min-height: 100vh;
             padding: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #f0f0f0;
+            color: #e8eaed;
+            line-height: 1.6;
         }
+
+        /* Container for the Survey Form */
         .container {
-            max-width: 800px; width: 100%; background: #2A2A2A;
-            border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); overflow: hidden;
-            border: 1px solid #3A3A3A;
+            max-width: 800px;
+            width: 100%;
+            background: #1a1a1a; /* Slightly lighter dark for contrast */
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border: 1px solid #333333; /* Darker border */
         }
+
+        /* Header Section */
         .header {
-            background: #2A2A2A;
+            background: #1a1a1a; /* Match container background */
             padding: 30px 15px;
-            text-align: center; color: white;
+            text-align: center;
+            color: white;
         }
         .logo {
             margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5em;
-            font-weight: 700;
-            color: #E0E0E0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            height: 60px; /* Define height for SVG container */
         }
-        h1 { font-size: 1.8em; margin-bottom: 8px; font-weight: 700; color: #E0E0E0; }
-        .subtitle { font-size: 1em; opacity: 0.9; color: #B0B0B0; }
-        .section { padding: 20px 15px; display: none; animation: fadeIn 0.5s ease-in-out; }
-        .section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* SVG Logo Styling */
+        .gemini-svg-logo {
+            width: 250px; /* Match desired width */
+            height: 100%; /* Fill parent height */
+            filter: drop-shadow(0 0 8px rgba(137, 179, 248, 0.4)); /* Subtle glow */
+        }
+        /* Gradients for the SVG */
+        .gemini-svg-logo #star-gradient stop:first-child { stop-color: #66b3ff; } /* Blue start */
+        .gemini-svg-logo #star-gradient stop:last-child { stop-color: #ff80ed; } /* Pink end */
+        .gemini-svg-logo #text-gradient stop:first-child { stop-color: #66b3ff; } /* Blue start for text */
+        .gemini-svg-logo #text-gradient stop:last-child { stop-color: #ff80ed; } /* Pink end for text */
+
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #d1e2ff; /* Lighter blue-ish white */
+        }
+        .subtitle {
+            font-size: 1em;
+            opacity: 0.9;
+            color: #a0a0a0; /* Softer subtitle color */
+        }
+
+        /* Section Display and Animations */
+        .section {
+            padding: 20px 15px;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         
-        /* ##### STYLES FOR THE NEW FRONT PAGE ##### */
+        /* Welcome Section Specifics */
         .welcome-section {
             display: flex;
             flex-direction: column;
@@ -52,31 +92,24 @@
             align-items: center;
             text-align: center; 
             padding: 60px 30px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
             min-height: 400px;
         }
         .welcome-section > * {
-             animation: slideUpFadeIn 0.8s ease-out forwards;
-             opacity: 0;
+            animation: slideUpFadeIn 0.8s ease-out forwards;
+            opacity: 0;
         }
         @keyframes slideUpFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .welcome-section h2 { 
-            font-size: 2em; 
+        .welcome-section h2 {
+            font-size: 2em;
             color: #ffffff;
             margin-bottom: 15px;
         }
-        .welcome-section p { 
-            color: #b0b0b0; 
-            line-height: 1.7; 
+        .welcome-section p {
+            color: #cccccc;
+            line-height: 1.7;
             font-size: 1.1em;
             max-width: 550px;
             margin-bottom: 30px;
@@ -87,19 +120,28 @@
         }
         .time-estimate {
             font-size: 0.8em;
-            color: #777;
-            margin-top: 10px !important; /* Overriding default p margin */
+            color: #888888;
+            margin-top: 10px !important;
             animation-delay: 0.5s;
         }
 
+        /* Question Container Styling */
         .question-container {
-            margin-bottom: 30px; padding: 20px; background: #333333;
-            border-radius: 12px; border: 1px solid #444444;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #282828; /* Slightly lighter inner background */
+            border-radius: 12px;
+            border: 1px solid #444444; /* Match theme */
         }
         .question-label {
-            font-size: 1.1em; color: #ffffff; margin-bottom: 20px;
-            font-weight: 600; text-align: center;
+            font-size: 1.1em;
+            color: #d1e2ff; /* Lighter blue-ish white */
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
         }
+
+        /* Meter/Gauge Styling */
         .meter-container {
             position: relative;
             max-width: 320px;
@@ -109,118 +151,319 @@
         }
         .speedometer-gauge, .emoji-meter, .needle {
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
         .speedometer-gauge { z-index: 1; }
         .emoji-meter { z-index: 2; pointer-events: none; }
         .needle { z-index: 3; }
         .needle-image {
-            width: 4px; height: 45%; background: #ffffff;
-            position: absolute; bottom: 0; left: 50%;
+            width: 4px;
+            height: 45%;
+            background: #ffffff;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
             transform-origin: bottom center;
             transform: translateX(-50%) rotate(-90deg);
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .needle-image::after {
-            content: ''; position: absolute; width: 12px; height: 12px;
-            background: #ffffff; border-radius: 50%; bottom: -6px;
-            left: 50%; transform: translateX(-50%);
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #ffffff;
+            border-radius: 50%;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
         }
         .emoji-container {
-            position: absolute; transform: translate(-50%, -50%);
-            display: flex; flex-direction: column; align-items: center;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .emoji {
-            font-size: 20px; margin-bottom: 5px; transition: transform 0.3s;
+            font-size: 20px;
+            margin-bottom: 5px;
+            transition: transform 0.3s;
             color: white;
         }
-        .emoji.active { transform: scale(1.3); }
-        .emoji-label { font-size: 0.7em; color: #aaa; text-align: center; }
+        .emoji.active {
+            transform: scale(1.3);
+        }
+        .emoji-label {
+            font-size: 0.7em;
+            color: #b0b0b0; /* Softer label color */
+            text-align: center;
+        }
+
+        /* Rating Buttons */
         .rating-buttons {
-            display: flex; justify-content: center;
-            gap: 6px; margin-top: 20px; flex-wrap: wrap;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 20px;
+            flex-wrap: wrap;
         }
         .rating-btn {
-            padding: 8px 12px; border: 2px solid #00B1D2;
-            background: #333333;
-            color: #00B1D2; border-radius: 20px; cursor: pointer;
-            transition: all 0.3s; font-weight: 600;
+            padding: 8px 12px;
+            border: 2px solid #66b3ff; /* Brighter blue for buttons */
+            background: #282828;
+            color: #66b3ff;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
         }
-        .rating-btn:hover { background: #00B1D2; color: white; transform: translateY(-2px); }
-        .rating-btn.selected { background: #00B1D2; color: white; }
-        .form-group { margin-bottom: 20px; }
+        .rating-btn:hover {
+            background: #66b3ff;
+            color: #000000; /* Black text on hover */
+            transform: translateY(-2px);
+        }
+        .rating-btn.selected {
+            background: linear-gradient(135deg, #66b3ff, #ff80ed); /* Gradient for selected */
+            color: #000000;
+            border-color: #ff80ed; /* End color of gradient */
+        }
+
+        /* Form Group and Inputs */
+        .form-group {
+            margin-bottom: 20px;
+        }
         .form-group label {
-            display: block; margin-bottom: 8px; color: #f0f0f0;
-            font-weight: 600; font-size: 1em;
+            display: block;
+            margin-bottom: 8px;
+            color: #d1e2ff;
+            font-weight: 600;
+            font-size: 1em;
         }
-        .form-group textarea, .form-group select {
-            width: 100%; padding: 12px 15px; border: 2px solid #555555;
-            border-radius: 10px; font-size: 1em; transition: border-color 0.3s;
-            background: #2A2A2A; color: #f0f0f0;
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #555555;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+            background: #1a1a1a; /* Match container background */
+            color: #e8eaed;
         }
-        .form-group textarea::placeholder { color: #888; opacity: 1; }
-        .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #00B1D2; }
+        .form-group textarea::placeholder {
+            color: #999;
+            opacity: 1;
+        }
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #66b3ff; /* Brighter blue focus */
+        }
+
+        /* Buttons (Next, Previous, Submit) */
         .btn {
-            padding: 12px 30px; background: linear-gradient(135deg, #00B1D2, #0087A1);
-            color: white; border: none; border-radius: 25px; font-size: 1em;
-            font-weight: 600; cursor: pointer; transition: all 0.3s;
-            display: inline-block; margin: 15px 8px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #66b3ff, #ff80ed); /* Blue to Pink gradient */
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            margin: 15px 8px;
         }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 177, 210, 0.3); }
-        .btn-secondary { background: #555; }
-        .btn-secondary:hover { background: #666; box-shadow: 0 10px 25px rgba(100, 100, 100, 0.2); }
-        .navigation { display: flex; justify-content: center; padding-top: 15px; }
-        .thank-you { text-align: center; padding: 60px 30px; }
-        .thank-you h2 { color: #00B1D2; font-size: 2.2em; margin-bottom: 15px; }
-        .thank-you p { color: #aaa; font-size: 1.1em; line-height: 1.6; }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 179, 255, 0.4); /* Blue glow */
+        }
+        .btn-secondary {
+            background: #555555; /* Darker secondary button */
+        }
+        .btn-secondary:hover {
+            background: #777777;
+            box-shadow: 0 10px 25px rgba(100, 100, 100, 0.2);
+        }
+        .navigation {
+            display: flex;
+            justify-content: center;
+            padding-top: 15px;
+            flex-wrap: wrap; /* Added for responsiveness */
+        }
+
+        /* Thank You Section */
+        .thank-you {
+            text-align: center;
+            padding: 60px 30px;
+        }
+        .thank-you h2 {
+            color: #66b3ff; /* Brighter blue for thank you */
+            font-size: 2.2em;
+            margin-bottom: 15px;
+        }
+        .thank-you p {
+            color: #cccccc;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
         .checkmark {
-            width: 70px; height: 70px; margin: 0 auto 25px; background: #00B1D2;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #66b3ff, #ff80ed); /* Gradient checkmark */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             animation: scaleIn 0.5s ease-in;
         }
-        @keyframes scaleIn { from { transform: scale(0); } to { transform: scale(1); } }
-        .progress-bar { height: 6px; background: #3A3A3A; position: relative; overflow: hidden; }
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            height: 6px;
+            background: #333333;
+            position: relative;
+            overflow: hidden;
+        }
         .progress-fill {
-            height: 100%; background: linear-gradient(90deg, #00B1D2, #0087A1);
-            width: 0%; transition: width 0.5s ease;
+            height: 100%;
+            background: linear-gradient(90deg, #66b3ff, #ff80ed); /* Gradient progress */
+            width: 0%;
+            transition: width 0.5s ease;
         }
-        .required { color: #FF6F6F; }
-        .loading { display: none; text-align: center; margin: 20px 0; }
+
+        /* Required Field Indicator */
+        .required {
+            color: #ff6666; /* Redder for error */
+            font-size: 0.9em;
+            margin-left: 5px;
+        }
+
+        /* Loading Indicator */
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+            color: #cccccc;
+        }
         .loading-spinner {
-            border: 4px solid #444; border-top: 4px solid #00B1D2;
-            border-radius: 50%; width: 40px; height: 40px;
-            animation: spin 1s linear infinite; margin: 0 auto 15px;
+            border: 4px solid #333333;
+            border-top: 4px solid #66b3ff; /* Blue spinner */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 0; /* Full width on smaller screens */
+                margin: 0;
+            }
+            .header {
+                padding: 20px 10px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            .subtitle {
+                font-size: 0.9em;
+            }
+            .welcome-section {
+                padding: 40px 20px;
+            }
+            .welcome-section h2 {
+                font-size: 1.8em;
+            }
+            .welcome-section p {
+                font-size: 1em;
+            }
+            .question-container {
+                padding: 15px;
+            }
+            .question-label {
+                font-size: 1em;
+            }
+            .rating-btn {
+                padding: 6px 10px;
+                font-size: 0.9em;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+            .checkmark {
+                width: 50px;
+                height: 50px;
+            }
+            .thank-you h2 {
+                font-size: 1.8em;
+            }
+            .thank-you p {
+                font-size: 1em;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <form id="surveyForm" action="https://script.google.com/macros/s/AKfycbwa4DEg5h_BcnznALdm48fxyJzJJVCJD3vXJ7LxYlRvO_yqgvJdfOLbOPDia5f973p8/exec" method="POST" onsubmit="return false;">
-            <input type="hidden" name="sheetName" value="SurveyResponses">
+        <form id="surveyForm" action="https://script.google.com/macros/s/AKfycbwZkot1uwcHwV55nAplrid2MAmMnRRs5Z_1uxJn9j-ND6_lJNCUVx1G6YNjO2yz08MK/exec" method="POST" onsubmit="return false;">
+            <input type="hidden" name="sheetName" value="GeminiFeedback">
             
             <div class="progress-bar"><div class="progress-fill" id="progressBar"></div></div>
             <div class="header">
-                <div class="logo">Perplexity</div>
-                <h1>Perplexity Experience Survey</h1>
-                <p class="subtitle">Your feedback helps improve AI-powered search</p>
-            </div>
+                <div class="logo">
+                    <svg class="gemini-svg-logo" viewBox="0 0 200 60" preserveAspectRatio="xMidYMid meet">
+                        <defs>
+                            <linearGradient id="star-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#66b3ff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#ff80ed;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="text-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#66b3ff;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#a066ff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#ff80ed;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <polygon points="20,10 25,25 40,30 25,35 20,50 15,35 0,30 15,25" fill="url(#star-gradient)" />
+                        
+                        <text x="50" y="42" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="url(#text-gradient)">
+                            Gemini
+                        </text>
+                    </svg>
+                </div>
+                <h1>Gemini Experience Survey</h1>
+                <p class="subtitle"></p> </div>
 
             <div class="section active" id="section-0">
                 <div class="welcome-section">
-                    <h2>Your Insight Matters</h2>
-                    <p>Help us improve the next generation of AI search. Your anonymous feedback is vital for our NLP research project.</p>
+                    <h2>Help Us Shape the Future of AI</h2>
+                    <p>Your insights are crucial for our research. Thank you for taking the time to share your experience with Gemini.</p>
                     <button type="button" class="btn" id="beginSurveyBtn">Begin Survey</button>
-                    <p class="time-estimate">Takes ~2 minutes</p>
+                    <p class="time-estimate">Takes ~3 minutes</p>
                 </div>
             </div>
             
             <div class="section" id="section-1">
                 <div class="question-container">
-                    <div class="question-label">1. What is one feature or capability that you believe distinguishes Perplexity from other AI models you have used? <span class="required">*</span></div>
+                    <div class="question-label">1. Describe your overall experience using Gemini. What stands out most to you? <span class="required">*</span></div>
                     <div class="form-group">
-                        <textarea id="DistinguishingFeature" name="DistinguishingFeature" rows="4" required></textarea>
+                        <textarea name="OverallExperience" rows="4" required></textarea>
                     </div>
                 </div>
                 <div class="navigation"><button type="button" class="btn" id="nextBtn1">Next</button></div>
@@ -228,23 +471,23 @@
 
             <div class="section" id="section-2">
                 <div class="question-container">
-                    <div class="question-label">2. Based on your experience, for which type of research or inquiry is Perplexity most effectively used? <span class="required">*</span></div>
+                    <div class="question-label">2. What specific task does Gemini handle best for you? Give a brief example? <span class="required">*</span></div>
                     <div class="form-group">
-                        <textarea id="EffectiveUse" name="EffectiveUse" rows="3" required></textarea>
+                        <textarea name="BestTaskExample" rows="4" required></textarea>
                     </div>
                 </div>
                 <div class="navigation"><button type="button" class="btn btn-secondary" id="prevBtn2">Previous</button><button type="button" class="btn" id="nextBtn2">Next</button></div>
             </div>
 
-            <div class="section" id="section-3"><div class="question-container"><div class="question-label">3. How frequently does Perplexity provide an answer that is both what you expected and delivered in the way you expected?</div><div class="meter-container"><canvas class="speedometer-gauge" id="speedometer1"></canvas><div class="emoji-meter" id="emojiMeter1"></div><div class="needle"><div class="needle-image" id="needle-img1"></div></div></div><div class="rating-buttons"><button type="button" class="rating-btn" data-question="1" data-rating="1">1</button><button type="button" class="rating-btn" data-question="1" data-rating="2">2</button><button type="button" class="rating-btn" data-question="1" data-rating="3">3</button><button type="button" class="rating-btn" data-question="1" data-rating="4">4</button><button type="button" class="rating-btn" data-question="1" data-rating="5">5</button></div></div><div class="navigation"><button type="button" class="btn btn-secondary" id="prevBtn3">Previous</button><button type="button" class="btn" id="nextBtn3">Next</button></div></div>
-            <div class="section" id="section-4"><div class="question-container"><div class="question-label">4. How efficient is Perplexity at providing a comprehensive, summarized overview of a complex topic?</div><div class="meter-container"><canvas class="speedometer-gauge" id="speedometer2"></canvas><div class="emoji-meter" id="emojiMeter2"></div><div class="needle"><div class="needle-image" id="needle-img2"></div></div></div><div class="rating-buttons"><button type="button" class="rating-btn" data-question="2" data-rating="1">1</button><button type="button" class="rating-btn" data-question="2" data-rating="2">2</button><button type="button" class="rating-btn" data-question="2" data-rating="3">3</button><button type="button" class="rating-btn" data-question="2" data-rating="4">4</button><button type="button" class="rating-btn" data-question="2" data-rating="5">5</button></div></div><div class="navigation"><button type="button" class="btn btn-secondary" id="prevBtn4">Previous</button><button type="button" class="btn" id="nextBtn4">Next</button></div></div>
-            <div class="section" id="section-5"><div class="question-container"><div class="question-label">5. How would you rate the quality and relevance of the sources that Perplexity cites?</div><div class="meter-container"><canvas class="speedometer-gauge" id="speedometer3"></canvas><div class="emoji-meter" id="emojiMeter3"></div><div class="needle"><div class="needle-image" id="needle-img3"></div></div></div><div class="rating-buttons"><button type="button" class="rating-btn" data-question="3" data-rating="1">1</button><button type="button" class="rating-btn" data-question="3" data-rating="2">2</button><button type="button" class="rating-btn" data-question="3" data-rating="3">3</button><button type="button" class="rating-btn" data-question="3" data-rating="4">4</button><button type="button" class="rating-btn" data-question="3" data-rating="5">5</button></div></div><div class="navigation"><button type="button" class="btn btn-secondary" id="prevBtn5">Previous</button><button type="button" class="btn" id="nextBtn5">Next</button></div></div>
-            <div class="section" id="section-6"><div class="question-container"><div class="question-label">6. How likely are you to use Perplexity as a starting point for in-depth academic research?</div><div class="meter-container"><canvas class="speedometer-gauge" id="speedometer4"></canvas><div class="emoji-meter" id="emojiMeter4"></div><div class="needle"><div class="needle-image" id="needle-img4"></div></div></div><div class="rating-buttons"><button type="button" class="rating-btn" data-question="4" data-rating="1">1</button><button type="button" class="rating-btn" data-question="4" data-rating="2">2</button><button type="button" class="rating-btn" data-question="4" data-rating="3">3</button><button type="button" class="rating-btn" data-question="4" data-rating="4">4</button><button type="button" class="rating-btn" data-question="4" data-rating="5">5</button><button type="button" class="rating-btn" data-question="4" data-rating="6">6</button><button type="button" class="rating-btn" data-question="4" data-rating="7">7</button><button type="button" class="rating-btn" data-question="4" data-rating="8">8</button><button type="button" class="rating-btn" data-question="4" data-rating="9">9</button><button type="button" class="rating-btn" data-question="4" data-rating="10">10</button></div></div><div class="navigation"><button type="button" class="btn btn-secondary" id="prevBtn6">Previous</button><button type="button" class="btn" id="nextBtn6">Next</button></div></div>
+            <div class="section" id="section-3"><div class="question-container"><div class="question-label">3. How frequently does Gemini provide an answer that is both what you expected and delivered in the way you expected?</div><div class="meter-container"><canvas class="speedometer-gauge" id="speedometer1"></canvas><div class="emoji-meter" id="emojiMeter1"></div><div class="needle"><div class="needle-image" id="needle-img1"></div></div></div><div class="rating-buttons"><button type="button" class="rating-btn" data-question="1" data-rating="1">1</button><button type="button" class="rating-btn" data-question="1" data-rating="2">2</button><button type="button" class="rating-btn" data-question="1" data-rating="3">3</button><button type="button" class="rating-btn" data-question="1" data-rating="4">4</button><button type="button" class="rating-btn" data-question="1" data-rating="5">5</button></div></div><div class="navigation"><button type="button" class="btn btn-secondary" id="prevBtn3">Previous</button><button type="button" class="btn" id="nextBtn3">Next</button></div></div>
+            <div class="section" id="section-4"><div class="question-container"><div class="question-label">4. How reliable do you find the factual accuracy and sourcing of information provided by Gemini?</div><div class="meter-container"><canvas class="speedometer-gauge" id="speedometer2"></canvas><div class="emoji-meter" id="emojiMeter2"></div><div class="needle"><div class="needle-image" id="needle-img2"></div></div></div><div class="rating-buttons"><button type="button" class="rating-btn" data-question="2" data-rating="1">1</button><button type="button" class="rating-btn" data-question="2" data-rating="2">2</button><button type="button" class="rating-btn" data-question="2" data-rating="3">3</button><button type="button" class="rating-btn" data-question="2" data-rating="4">4</button><button type="button" class="rating-btn" data-question="2" data-rating="5">5</button></div></div><div class="navigation"><button type="button" class="btn btn-secondary" id="prevBtn4">Previous</button><button type="button" class="btn" id="nextBtn4">Next</button></div></div>
+            <div class="section" id="section-5"><div class="question-container"><div class="question-label">5. How user-friendly and intuitive do you find the interface and functionality of Gemini?</div><div class="meter-container"><canvas class="speedometer-gauge" id="speedometer3"></canvas><div class="emoji-meter" id="emojiMeter3"></div><div class="needle"><div class="needle-image" id="needle-img3"></div></div></div><div class="rating-buttons"><button type="button" class="rating-btn" data-question="3" data-rating="1">1</button><button type="button" class="rating-btn" data-question="3" data-rating="2">2</button><button type="button" class="rating-btn" data-question="3" data-rating="3">3</button><button type="button" class="rating-btn" data-question="3" data-rating="4">4</button><button type="button" class="rating-btn" data-question="3" data-rating="5">5</button></div></div><div class="navigation"><button type="button" class="btn btn-secondary" id="prevBtn5">Previous</button><button type="button" class="btn" id="nextBtn5">Next</button></div></div>
+            <div class="section" id="section-6"><div class="question-container"><div class="question-label">6. How likely are you to choose Gemini for tasks requiring real-time, web-sourced information?</div><div class="meter-container"><canvas class="speedometer-gauge" id="speedometer4"></canvas><div class="emoji-meter" id="emojiMeter4"></div><div class="needle"><div class="needle-image" id="needle-img4"></div></div></div><div class="rating-buttons"><button type="button" class="rating-btn" data-question="4" data-rating="1">1</button><button type="button" class="rating-btn" data-question="4" data-rating="2">2</button><button type="button" class="rating-btn" data-question="4" data-rating="3">3</button><button type="button" class="rating-btn" data-question="4" data-rating="4">4</button><button type="button" class="rating-btn" data-question="4" data-rating="5">5</button><button type="button" class="rating-btn" data-question="4" data-rating="6">6</button><button type="button" class="rating-btn" data-question="4" data-rating="7">7</button><button type="button" class="rating-btn" data-question="4" data-rating="8">8</button><button type="button" class="rating-btn" data-question="4" data-rating="9">9</button><button type="button" class="rating-btn" data-question="4" data-rating="10">10</button></div></div><div class="navigation"><button type="button" class="btn btn-secondary" id="prevBtn6">Previous</button><button type="button" class="btn" id="nextBtn6">Next</button></div></div>
             
             <div class="section" id="section-7">
                 <h2 style="margin-bottom: 25px; color: #ffffff; text-align: center;">A Little About You</h2>
-                <div class="form-group"><label for="usage">How often do you use Perplexity?</label><select id="usage" name="UsageFrequency"><option value="">Select frequency</option><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option><option value="rarely">Rarely</option></select></div>
-                <div class="form-group"><label for="purpose">What is its primary use?</label><select id="purpose" name="PrimaryPurpose"><option value="">Select primary use</option><option value="work">Work</option><option value="education">Education</option><option value="personal">Personal</option><option value="coding">Coding</option><option value="creative">Creative</option><option value="research">Research</option></select></div>
+                <div class="form-group"><label for="usage">How often do you use AI models?</label><select id="usage" name="UsageFrequency"><option value="">Select frequency</option><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option><option value="rarely">Rarely</option></select></div>
+                <div class="form-group"><label for="purpose">What is your primary field of work or study?</label><select id="purpose" name="PrimaryField"><option value="">Select field</option><option value="technology">Technology / Engineering</option><option value="business">Business / Finance</option><option value="education">Education / Academia</option><option value="arts">Arts / Humanities</option><option value="healthcare">Healthcare</option><option value="personal">General Personal Use</option><option value="other">Other</option></select></div>
                 <div class="navigation"><button type="button" class="btn btn-secondary" id="prevBtn7">Previous</button><button type="button" class="btn" id="submitBtn">Submit Survey</button></div>
             </div>
 
@@ -256,47 +499,233 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             let currentSection = 0;
-            const totalSections = 9;
-            const ratings = { 1: 0, 2: 0, 3: 0, 4: 0 };
+            const totalSections = 9; // Total number of sections including welcome and thank you
+            const ratings = { 1: 0, 2: 0, 3: 0, 4: 0 }; // Store ratings for each question
             const surveyForm = document.getElementById('surveyForm');
 
-            function getDynamicSizes(container) { if (!container) return null; const rect = container.getBoundingClientRect(); return { width: rect.width, height: rect.height, centerX: rect.width / 2, centerY: rect.height, radius: rect.width * 0.45, lineWidth: rect.width * 0.1, positionRadius: rect.width * 0.35 }; }
-            function drawMeter(canvasId, maxValue = 5) { const canvas = document.getElementById(canvasId); if (!canvas || !canvas.getContext) return; const container = canvas.closest('.meter-container'); const sizes = getDynamicSizes(container); if (!sizes || sizes.width === 0) return; const dpr = window.devicePixelRatio || 1; canvas.width = sizes.width * dpr; canvas.height = sizes.height * dpr; canvas.style.width = `${sizes.width}px`; canvas.style.height = `${sizes.height}px`; const ctx = canvas.getContext('2d'); ctx.scale(dpr, dpr); ctx.clearRect(0, 0, sizes.width, sizes.height); const colors = maxValue === 10 ? ['#ef4444', '#f97316', '#eab308', '#84cc16', '#22c55e', '#10b981', '#06b6d4', '#3b82f6', '#6366f1', '#8b5cf6'] : ['#ef4444', '#eab308', '#84cc16', '#10b981', '#3b82f6']; const segmentAngle = Math.PI / colors.length; const startAngle = Math.PI; colors.forEach((color, index) => { ctx.beginPath(); ctx.arc(sizes.centerX, sizes.centerY, sizes.radius, startAngle + (index * segmentAngle), startAngle + ((index + 1) * segmentAngle)); ctx.strokeStyle = color; ctx.lineWidth = sizes.lineWidth; ctx.stroke(); }); }
-            function positionEmojis(meterId, maxValue = 5, labels = []) { const meter = document.getElementById(meterId); if (!meter) return; meter.innerHTML = ''; const container = meter.closest('.meter-container'); const sizes = getDynamicSizes(container); if (!sizes) return; const segmentAngle = Math.PI / (maxValue - 1); const startAngle = Math.PI; for (let i = 0; i < maxValue; i++) { const angle = startAngle + (i * segmentAngle); const x = sizes.centerX + sizes.positionRadius * Math.cos(angle); const y = sizes.centerY + sizes.positionRadius * Math.sin(angle); const emojiContainer = document.createElement('div'); emojiContainer.className = 'emoji-container'; emojiContainer.style.left = `${x}px`; emojiContainer.style.top = `${y}px`; const emoji = document.createElement('div'); emoji.className = 'emoji'; let emojiSet = maxValue === 10 ? ['😠', '😞', '😟', '😕', '😐', '🙂', '😊', '😁', '🤩', '🥳'] : ['😞', '😕', '😐', '🙂', '😊']; emoji.textContent = emojiSet[i] || '😐'; const emojiLabel = document.createElement('div'); emojiLabel.className = 'emoji-label'; emojiLabel.textContent = labels[i] || ''; emojiContainer.appendChild(emoji); emojiContainer.appendChild(emojiLabel); meter.appendChild(emojiContainer); } }
-            function setRating(questionId, rating) { ratings[questionId] = rating; const needle = document.getElementById(`needle-img${questionId}`); const maxValue = questionId === 4 ? 10 : 5; const angle = -90 + (rating - 1) * (180 / (maxValue - 1)); if (needle) needle.style.transform = `translateX(-50%) rotate(${angle}deg)`; document.querySelectorAll(`.rating-btn[data-question="${questionId}"]`).forEach(btn => { btn.classList.toggle('selected', parseInt(btn.dataset.rating) === rating); }); document.querySelectorAll(`#emojiMeter${questionId} .emoji`).forEach((emoji, index) => { emoji.classList.toggle('active', (index + 1) === rating); }); }
-            function updateProgressBar() { const progress = currentSection > 0 ? (currentSection / (totalSections - 2)) * 100 : 0; document.getElementById('progressBar').style.width = `${Math.min(progress, 100)}%`; }
-            function showSection(index) { document.querySelectorAll('.section').forEach(section => section.classList.remove('active')); const activeSection = document.getElementById(`section-${index}`); if (activeSection) activeSection.classList.add('active'); updateProgressBar(); setTimeout(() => { if (index === 3) { drawMeter('speedometer1', 5); positionEmojis('emojiMeter1', 5, ['Almost Never', 'Rarely', 'Sometimes', 'Often', 'Almost Always']); } else if (index === 4) { drawMeter('speedometer2', 5); positionEmojis('emojiMeter2', 5, ['Very Inefficient', 'Inefficient', 'Neutral', 'Efficient', 'Very Efficient']); } else if (index === 5) { drawMeter('speedometer3', 5); positionEmojis('emojiMeter3', 5, ['Very Poor', 'Poor', 'Average', 'Good', 'Excellent']); } else if (index === 6) { drawMeter('speedometer4', 10); const labels = Array.from({length: 10}, (_, i) => String(i + 1)); positionEmojis('emojiMeter4', 10, labels); } }, 50); }
-            function changeSection(step) { if (step > 0) { const currentInputs = document.getElementById(`section-${currentSection}`).querySelectorAll('[required]'); for (const input of currentInputs) { if (!input.value.trim()) { alert('Please answer the required question before proceeding.'); return; } } } currentSection += step; showSection(currentSection); }
+            // Helper to get dynamic dimensions of meter containers
+            function getDynamicSizes(container) {
+                if (!container) return null;
+                const rect = container.getBoundingClientRect();
+                return {
+                    width: rect.width,
+                    height: rect.height,
+                    centerX: rect.width / 2,
+                    centerY: rect.height,
+                    radius: rect.width * 0.45,
+                    lineWidth: rect.width * 0.1,
+                    positionRadius: rect.width * 0.35
+                };
+            }
+
+            // Function to draw the speedometer gauge
+            function drawMeter(canvasId, maxValue = 5) {
+                const canvas = document.getElementById(canvasId);
+                if (!canvas || !canvas.getContext) return;
+
+                const container = canvas.closest('.meter-container');
+                const sizes = getDynamicSizes(container);
+                if (!sizes || sizes.width === 0) return; // Exit if container not rendered or has no width
+
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = sizes.width * dpr;
+                canvas.height = sizes.height * dpr;
+                canvas.style.width = `${sizes.width}px`;
+                canvas.style.height = `${sizes.height}px`;
+
+                const ctx = canvas.getContext('2d');
+                ctx.scale(dpr, dpr);
+                ctx.clearRect(0, 0, sizes.width, sizes.height);
+
+                const colors = maxValue === 10 ?
+                    ['#ef4444', '#f97316', '#eab308', '#84cc16', '#22c55e', '#10b981', '#06b6d4', '#66b3ff', '#ff80ed', '#ff00ff'] : /* Adjusted gradient colors */
+                    ['#ef4444', '#eab308', '#84cc16', '#66b3ff', '#ff80ed']; /* Adjusted gradient colors */
+                
+                const segmentAngle = Math.PI / colors.length; // 180 degrees / number of segments
+                const startAngle = Math.PI; // Start from left (180 degrees)
+
+                colors.forEach((color, index) => {
+                    ctx.beginPath();
+                    ctx.arc(sizes.centerX, sizes.centerY, sizes.radius,
+                            startAngle + (index * segmentAngle),
+                            startAngle + ((index + 1) * segmentAngle));
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = sizes.lineWidth;
+                    ctx.stroke();
+                });
+            }
+
+            // Function to position emojis and labels on the meter
+            function positionEmojis(meterId, maxValue = 5, labels = []) {
+                const meter = document.getElementById(meterId);
+                if (!meter) return;
+                meter.innerHTML = ''; // Clear existing emojis
+
+                const container = meter.closest('.meter-container');
+                const sizes = getDynamicSizes(container);
+                if (!sizes) return;
+
+                const segmentAngle = Math.PI / (maxValue - 1); // Angle between each rating point
+                const startAngle = Math.PI; // Start from left (180 degrees)
+
+                for (let i = 0; i < maxValue; i++) {
+                    const angle = startAngle + (i * segmentAngle);
+                    const x = sizes.centerX + sizes.positionRadius * Math.cos(angle);
+                    const y = sizes.centerY + sizes.positionRadius * Math.sin(angle);
+
+                    const emojiContainer = document.createElement('div');
+                    emojiContainer.className = 'emoji-container';
+                    emojiContainer.style.left = `${x}px`;
+                    emojiContainer.style.top = `${y}px`;
+
+                    const emoji = document.createElement('div');
+                    emoji.className = 'emoji';
+                    let emojiSet = maxValue === 10 ?
+                        ['😠', '😞', '😟', '😕', '😐', '🙂', '😊', '😁', '🤩', '🥳'] :
+                        ['😞', '😕', '😐', '🙂', '😊'];
+                    emoji.textContent = emojiSet[i] || '😐'; // Default if not enough emojis
+
+                    const emojiLabel = document.createElement('div');
+                    emojiLabel.className = 'emoji-label';
+                    emojiLabel.textContent = labels[i] || ''; // Use provided label or empty
+                    
+                    emojiContainer.appendChild(emoji);
+                    emojiContainer.appendChild(emojiLabel);
+                    meter.appendChild(emojiContainer);
+                }
+            }
+
+            // Function to set the rating and move the needle
+            function setRating(questionId, rating) {
+                ratings[questionId] = rating;
+                const needle = document.getElementById(`needle-img${questionId}`);
+                const maxValue = questionId === 4 ? 10 : 5; // Question 4 has 1-10, others 1-5
+                
+                // Calculate angle: -90 (start) to +90 (end) across 180 degrees
+                const angle = -90 + (rating - 1) * (180 / (maxValue - 1));
+                if (needle) {
+                    needle.style.transform = `translateX(-50%) rotate(${angle}deg)`;
+                }
+
+                // Update button selection
+                document.querySelectorAll(`.rating-btn[data-question="${questionId}"]`).forEach(btn => {
+                    btn.classList.toggle('selected', parseInt(btn.dataset.rating) === rating);
+                });
+
+                // Update emoji active state
+                document.querySelectorAll(`#emojiMeter${questionId} .emoji`).forEach((emoji, index) => {
+                    emoji.classList.toggle('active', (index + 1) === rating);
+                });
+            }
+
+            // Update progress bar width
+            function updateProgressBar() {
+                // Adjust calculation for welcome and thank you screens
+                const progress = currentSection > 0 ? (currentSection / (totalSections - 2)) * 100 : 0;
+                document.getElementById('progressBar').style.width = `${Math.min(progress, 100)}%`;
+            }
+
+            // Show a specific section and update meter/emoji
+            function showSection(index) {
+                document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+                const activeSection = document.getElementById(`section-${index}`);
+                if (activeSection) {
+                    activeSection.classList.add('active');
+                }
+                updateProgressBar();
+
+                // Re-draw meters and emojis for active section if it contains one
+                setTimeout(() => { // Small delay to allow element to be rendered
+                    if (index === 3) {
+                        drawMeter('speedometer1', 5);
+                        positionEmojis('emojiMeter1', 5, ['Almost Never', '', 'Sometimes', '', 'Almost Always']);
+                        if (ratings[1]) setRating(1, ratings[1]); // Restore selection if any
+                    } else if (index === 4) {
+                        drawMeter('speedometer2', 5);
+                        positionEmojis('emojiMeter2', 5, ['Very Unreliable', '', 'Neutral', '', 'Very Reliable']);
+                        if (ratings[2]) setRating(2, ratings[2]);
+                    } else if (index === 5) {
+                        drawMeter('speedometer3', 5);
+                        positionEmojis('emojiMeter3', 5, ['Very Difficult', '', 'Average', '', 'Very Intuitive']);
+                        if (ratings[3]) setRating(3, ratings[3]);
+                    } else if (index === 6) {
+                        drawMeter('speedometer4', 10);
+                        const labels = Array.from({length: 10}, (_, i) => String(i + 1));
+                        positionEmojis('emojiMeter4', 10, labels);
+                        if (ratings[4]) setRating(4, ratings[4]);
+                    }
+                }, 50);
+            }
+
+            // Navigate between sections
+            function changeSection(step) {
+                // Validate required fields before moving forward
+                if (step > 0) {
+                    const currentInputs = document.getElementById(`section-${currentSection}`).querySelectorAll('[required]');
+                    for (const input of currentInputs) {
+                        if (!input.value.trim()) {
+                            alert('Please answer the required question before proceeding.');
+                            input.focus();
+                            return;
+                        }
+                    }
+                }
+                currentSection += step;
+                showSection(currentSection);
+            }
+
+            // Submit survey data to Google Apps Script
             function submitSurvey() {
                 const usage = document.getElementById('usage').value;
                 const purpose = document.getElementById('purpose').value;
+
                 if (!usage || !purpose) {
                     alert('Please answer all questions before submitting.');
                     return;
                 }
-                document.getElementById('loadingIndicator').style.display = 'block';
+
+                document.getElementById('loadingIndicator').style.display = 'block'; // Show loading spinner
+
                 const formData = new FormData(surveyForm);
-                formData.append('ExpectationsRating (D3)', ratings[1] || '');
-                formData.append('EfficiencyRating (D4)', ratings[2] || '');
-                formData.append('SourceQualityRating (D5)', ratings[3] || '');
-                formData.append('AcademicUseLikelihood (D6)', ratings[4] || '');
-                fetch(surveyForm.action, { method: 'POST', body: formData })
-                .then(response => response.json())
+                // Append rating values
+                formData.append('ExpectationsRating', ratings[1] || '');
+                formData.append('ReliabilityRating', ratings[2] || '');
+                formData.append('UsabilityRating', ratings[3] || '');
+                formData.append('WebSourceLikelihood', ratings[4] || '');
+
+                fetch(surveyForm.action, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json()) // Expect JSON response from Apps Script
                 .then(data => {
-                    document.getElementById('loadingIndicator').style.display = 'none';
+                    document.getElementById('loadingIndicator').style.display = 'none'; // Hide loading spinner
                     if (data.result === 'success') {
-                        currentSection = 8;
+                        currentSection = 8; // Move to thank you screen
                         showSection(currentSection);
-                    } else { alert('There was an error submitting your survey. Please try again.'); }
+                    } else {
+                        alert('There was an error submitting your survey. Please try again.');
+                    }
                 })
                 .catch(error => {
-                    document.getElementById('loadingIndicator').style.display = 'none';
+                    document.getElementById('loadingIndicator').style.display = 'none'; // Hide loading spinner on error
                     console.error('Error:', error);
                     alert('A network error occurred. Please check your connection and try again.');
                 });
             }
-            function resetSurvey() { surveyForm.reset(); Object.keys(ratings).forEach(key => { ratings[key] = 0; }); document.querySelectorAll('.rating-btn.selected').forEach(btn => btn.classList.remove('selected')); document.querySelectorAll('.needle-image').forEach(needle => needle.style.transform = `translateX(-50%) rotate(-90deg)`); document.querySelectorAll('.emoji.active').forEach(emoji => emoji.classList.remove('active')); currentSection = 0; showSection(currentSection); }
 
+            // Reset survey to initial state
+            function resetSurvey() {
+                surveyForm.reset(); // Clear all form fields
+                Object.keys(ratings).forEach(key => { ratings[key] = 0; }); // Reset ratings
+                document.querySelectorAll('.rating-btn.selected').forEach(btn => btn.classList.remove('selected')); // Deselect rating buttons
+                document.querySelectorAll('.needle-image').forEach(needle => needle.style.transform = `translateX(-50%) rotate(-90deg)`); // Reset needles
+                document.querySelectorAll('.emoji.active').forEach(emoji => emoji.classList.remove('active')); // Deactivate emojis
+                currentSection = 0;
+                showSection(currentSection);
+            }
+
+            // Event Listeners for Navigation and Ratings
             document.getElementById('beginSurveyBtn').addEventListener('click', () => changeSection(1));
             document.getElementById('nextBtn1').addEventListener('click', () => changeSection(1));
             document.getElementById('prevBtn2').addEventListener('click', () => changeSection(-1));
@@ -312,9 +741,26 @@
             document.getElementById('prevBtn7').addEventListener('click', () => changeSection(-1));
             document.getElementById('submitBtn').addEventListener('click', submitSurvey);
             document.getElementById('resetBtn').addEventListener('click', resetSurvey);
-            document.querySelectorAll('.rating-btn').forEach(button => { button.addEventListener('click', (e) => { const questionId = parseInt(e.target.dataset.question); const rating = parseInt(e.target.dataset.rating); setRating(questionId, rating); }); });
+
+            // Event listeners for rating buttons
+            document.querySelectorAll('.rating-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const questionId = parseInt(e.target.dataset.question);
+                    const rating = parseInt(e.target.dataset.rating);
+                    setRating(questionId, rating);
+                });
+            });
+
+            // Handle window resize to redraw meters correctly
             let resizeTimer;
-            window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { showSection(currentSection); }, 100); });
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    showSection(currentSection); // Re-render current section to adjust meters
+                }, 100);
+            });
+
+            // Initial display of the first section
             showSection(currentSection);
         });
     </script>
